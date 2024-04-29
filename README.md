@@ -1,5 +1,7 @@
 pChartApp Application
 
+video presentation: https://drive.google.com/file/d/1cScSZvl-_703flCjtHQW6g7wFFffbTXk/view?usp=sharing
+
 Overview:
 pChartApp is a robust application designed for managing patient charts seamlessly using SwiftUI and Firebase services. It integrates Firebase for backend operations including authentication, storing, and managing patient notes.
 
