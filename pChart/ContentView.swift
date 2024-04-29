@@ -17,34 +17,46 @@ struct ContentView: View {
     var body: some View {
         if authViewModel.isAuthenticated {
             NavigationView {
-                List {
-                    ForEach($noteApp.patientNotes.indices, id: \.self) { index in
-                        NavigationLink(destination: NoteDetail(note: $noteApp.patientNotes[index])) {
-                            Text(noteApp.patientNotes[index].patientID)
+                ZStack{
+                    List {
+                        ForEach($noteApp.patientNotes.indices, id: \.self) { index in
+                            NavigationLink(destination: NoteDetail(note: $noteApp.patientNotes[index])) {
+                                Text(noteApp.patientNotes[index].patientID)
+                            }
                         }
-                    }
-                    Section{
-                        NavigationLink{
-                            NoteDetail(note: $note)
-                        } label: {
-                            Text("New Chart")
-                                .foregroundColor(Color.gray)
-                                .font(.system(size: 15))
+                        
+                        //.listRowBackground(Color.accentColor.opacity(0.5))
+                        
+                        Section{
+                            NavigationLink{
+                                NoteDetail(note: $note)
+                            } label: {
+                                Text("New Chart")
+                                    .foregroundColor(Color.gray)
+                                    .font(.system(size: 15))
+                            }
+                            //.listRowBackground(Color.accentColor.opacity(0.5))
                         }
+                        .listStyle(GroupedListStyle())
+                        //.listRowBackground(Color.accentColor.opacity(0.5))
                     }
-                    .listStyle(GroupedListStyle())
-                }
-                .navigationTitle("Patient Charts")
-                .navigationBarItems(trailing: Button("Sign Out") {
-                    authViewModel.signOut()
-                    print("User out")
-                }
-                .buttonStyle(ProminentButtonStyle()))
-                .onAppear {
-                    Task {
-                        await noteApp.fetchData()
+                    .navigationTitle("Patient Charts")
+                    
+                    
+                    .navigationBarItems(trailing: Button("Sign Out") {
+                        authViewModel.signOut()
+                        print("User out")
+                    }
+                        .buttonStyle(ProminentButtonStyle()))
+                    .onAppear {
+                        Task {
+                            await noteApp.fetchData()
+                        }
+                        
                     }
                 }
+                .padding()
+                .background(Color.accentColor.opacity(0.7))
             }
         } else {
             AuthView().environmentObject(authViewModel)

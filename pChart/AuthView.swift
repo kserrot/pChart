@@ -68,13 +68,15 @@ struct AuthView: View {
             }
         }
         .padding()
-        .background(Color.accentColor.ignoresSafeArea())
+        .background(Color.accentColor.opacity(0.7))
     }
 }
+    
 
 struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
         AuthView()
             .environmentObject(AuthViewModel())
+            
     }
 }

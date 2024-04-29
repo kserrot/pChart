@@ -20,18 +20,18 @@ struct NoteDetail: View {
             Text("Conditions")
                 .font(.headline)
             TextEditor(text: $note.title)
-                .frame(minHeight: 50) // Set a minimum height for the text editor
+                .frame(minHeight: 50) // minimum height for text editor
                 .padding(4)
-                .background(Color.gray.opacity(0.5)) // Slightly darker background for the editor
+                .background(Color.gray.opacity(0.5)) // Slightly darker background
                 .cornerRadius(5)
 
             // Multi-line text editor for notes
             Text("Notes")
                 .font(.headline)
             TextEditor(text: $note.noteContent)
-                .frame(minHeight: 50) // Set a minimum height for the text editor
+                .frame(minHeight: 50) // minimum height for text editor
                 .padding(4)
-                .background(Color.gray.opacity(0.5)) // Slightly darker background for the editor
+                .background(Color.gray.opacity(0.5)) // Slightly darker background
                 .cornerRadius(5)
 
             TextField("Created at: ", text: $note.createdAt)
@@ -54,11 +54,16 @@ struct NoteDetail: View {
             .cornerRadius(10)
         }
         .padding()
-        //.background(Color.navy) // Background color for this view
+        .background(Color.accentColor.opacity(0.7)) // Background color for this view
         .navigationTitle("Edit Note")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Clear") { clearFields() }
+                    .buttonStyle(.bordered)
+                    .controlSize(.mini)
+                    .background(Color.white)
+                    .foregroundColor(.blue)
+                    .cornerRadius(10)
             }
         }
     }
@@ -77,10 +82,9 @@ extension View {
     func customTextFieldStyle() -> some View {
         self
             .font(.system(size: 20))
-            //.foregroundColor(.white)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding()
-            .background(Color.gray.opacity(0.7)) // Lighter background for text fields
+            .background(Color.gray.opacity(0.7)) // Lighter background
     }
 }
 
